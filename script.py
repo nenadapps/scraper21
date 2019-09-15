@@ -94,7 +94,9 @@ def get_page_items(url):
 
     try:
         for item in html.select('.itemTitle a'):
-            item_link = item.get('href').replace('&amp;', '&').strip()
+            item_link_temp = item.get('href').replace('&amp;', '&').strip()
+            item_link_parts = item_link_temp.split('&zenid=')
+            item_link = item_link_parts[0]
             if item_link not in items:
                 items.append(item_link)
     except:
