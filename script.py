@@ -35,10 +35,21 @@ def get_details(url):
         stamp['price'] = None
         
     try:
+        number = ''
+        stock_items = html.select('#productDetailsList li')
+        for stock_item in stock_items:
+            stock_item_text = stock_item.get_text().strip()
+            if 'in Stock' in stock_item_text:
+                number = stock_item_text.replace('in Stock', '').strip()
+        stamp['number'] = number
+    except:
+        stamp['number'] = None 
+        
+    try:
         title = html.select('#productName')[0].get_text().strip()
         stamp['title'] = title
     except:
-        stamp['title'] = None    
+        stamp['title'] = None      
 
     try:
         sub_category_cont = html.select('#categoryIcon')[0]
@@ -79,7 +90,7 @@ def get_details(url):
     stamp['url'] = url
     print(stamp)
     print('+++++++++++++')
-    sleep(randint(25, 65))
+    #sleep(randint(25, 65))
            
     return stamp
 
