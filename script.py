@@ -90,7 +90,7 @@ def get_details(url):
     stamp['url'] = url
     print(stamp)
     print('+++++++++++++')
-    #sleep(randint(25, 65))
+    sleep(randint(25, 65))
            
     return stamp
 
