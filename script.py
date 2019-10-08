@@ -146,10 +146,11 @@ def get_categories(category_url):
     
     return items
 
-def get_page_items_urls(url):
-    page_items, page_url = get_page_items(url)
-    for page_item in page_items:
-        stamp = get_details(page_item)
+def get_page_items_urls(page_url):
+    while(page_url):
+        page_items, page_url = get_page_items(page_url)
+        for page_item in page_items:
+            stamp = get_details(page_item)
 
 item_dict = {
 'Canada':'https://www.jacestamps.com/index.php?main_page=index&cPath=7&zenid=6fq7p13s0qdbbot8q1mphq85j6',
