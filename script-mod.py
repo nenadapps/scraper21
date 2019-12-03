@@ -65,8 +65,10 @@ def get_details(url):
         return stamp
 
     try:
-        price = html.select('.productBasePrice')[0].get_text().strip()
-        stamp['price'] = price.replace('C$', '').replace(',', '').strip()
+        price = html.select('.productSalePrice')[0].get_text().strip()
+        if not price:
+            price = html.select('.productBasePrice')[0].get_text().strip()
+        stamp['price'] = price.replace('Sale:', '').replace('C$', '').replace(',', '').strip()
     except: 
         stamp['price'] = None
         
