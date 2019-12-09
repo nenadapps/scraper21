@@ -55,6 +55,16 @@ def get_html(url):
         
     return html_content
 
+def get_price(html, selector):
+    
+    price = ''
+    try:
+        price = html.select(selector)[0].get_text().strip()
+    except: 
+        pass
+        
+    return price
+
 def get_details(url):
     
     stamp = {}
@@ -65,9 +75,9 @@ def get_details(url):
         return stamp
 
     try:
-        price = html.select('.productSalePrice')[0].get_text().strip()
+        price = get_price(html, '.productSalePrice')
         if not price:
-            price = html.select('.productBasePrice')[0].get_text().strip()
+            price = get_price(html, '#productPrices .productBasePrice')
         stamp['price'] = price.replace('Sale:', '').replace('C$', '').replace(',', '').strip()
     except: 
         stamp['price'] = None
